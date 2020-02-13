@@ -1,5 +1,5 @@
 {
-  "name": "elgato-key-light",
+  "name": "elgato-light-api",
   "version": "1.0.0",
   "description": "Control Elgato Key Lights using Javascript!",
   "main": "./dist/index.js",
@@ -13,13 +13,13 @@
     "Key Lights",
     "Streaming"
   ],
-  "homepage": "https://github.com/NickParks/elgato-key-light",
+  "homepage": "https://github.com/NickParks/elgato-light-api",
   "repository": {
     "type": "git",
-    "url": "https://github.com/NickParks/elgato-key-light.git"
+    "url": "https://github.com/NickParks/elgato-light-api.git"
   },
   "bugs": {
-    "url": "https://github.com/NickParks/elgato-key-light/issues",
+    "url": "https://github.com/NickParks/elgato-light-api/issues",
     "email": "nickparksdev@gmail.com"
   },
   "author": "Nick Parks <nickparksdev@gmail.com> (http://nickparks.me/)",
