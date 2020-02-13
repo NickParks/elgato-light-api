@@ -1,6 +1,6 @@
 {
   "name": "elgato-light-api",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Control Elgato Key Lights using Javascript!",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
