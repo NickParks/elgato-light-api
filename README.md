@@ -3,7 +3,7 @@ Control Elgato Key Lights with Javascript!
 
 ## Installation
 
-Running `npm i elgato-key-light` will install the package. Typescript is natively supported.
+Running `npm i elgato-light-api` will install the package. Typescript is natively supported.
 
 ## How to use
 
