@@ -1,0 +1,28 @@
+{
+  "name": "elgato-key-light",
+  "version": "1.0.0",
+  "description": "Control Elgato Key Lights using Javascript!",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc && node dist/tests/test.js",
+    "start": "tsc && node dist/index.js"
+  },
+  "keywords": [
+    "Elgato",
+    "Key Lights",
+    "Streaming"
+  ],
+  "author": "Nick Parks <nickparksdev@gmail.com> (http://nickparks.me/)",
+  "license": "MIT",
+  "dependencies": {
+    "bonjour": "^3.5.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5"
+  },
+  "devDependencies": {
+    "@types/bonjour": "^3.5.5",
+    "@types/request": "^2.48.4",
+    "@types/request-promise": "^4.1.45"
+  }
+}
