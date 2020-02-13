@@ -13,6 +13,11 @@
     "Key Lights",
     "Streaming"
   ],
+  "homepage": "https://github.com/NickParks/elgato-key-light",
+  "bugs": {
+    "url": "https://github.com/NickParks/elgato-key-light/issues",
+    "email": "nickparksdev@gmail.com"
+  },
   "author": "Nick Parks <nickparksdev@gmail.com> (http://nickparks.me/)",
   "license": "MIT",
   "dependencies": {
