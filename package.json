@@ -1,11 +1,13 @@
 {
   "name": "elgato-light-api",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Control Elgato Key Lights using Javascript!",
-  "main": "./dist/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "tsc && node dist/tests/test.js",
+    "prepare": "npm run build",
     "start": "tsc && node dist/index.js"
   },
   "keywords": [
@@ -30,8 +32,12 @@
     "request-promise": "^4.2.5"
   },
   "devDependencies": {
+    "typescript": "^3.7.5",
     "@types/bonjour": "^3.5.5",
     "@types/request": "^2.48.4",
     "@types/request-promise": "^4.1.45"
-  }
+  },
+  "files": [
+    "dist/**/*"
+  ]
 }

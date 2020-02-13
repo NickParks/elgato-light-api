@@ -1,5 +1,5 @@
-import ElgatoLightAPI from "../index";
-import KeyLight from "../types/KeyLight";
+import { ElgatoLightAPI } from "../ElgatoLightAPI";
+import { KeyLight } from "../types/KeyLight";
 
 const lightAPI = new ElgatoLightAPI();
 

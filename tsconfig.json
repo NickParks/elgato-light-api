@@ -1,20 +1,19 @@
 {
     "compilerOptions": {
+        "target": "es5",
         "module": "commonjs",
-        "esModuleInterop": true,
-        "target": "es6",
-        "declaration": true,
-        "moduleResolution": "node",
-        "sourceMap": true,
         "outDir": "dist",
-        "baseUrl": ".",
-        "paths": {
-            "*": [
-                "node_modules/*"
-            ]
-        }
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "declaration": true,
     },
     "include": [
         "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "src/tests/*.ts"
     ]
 }

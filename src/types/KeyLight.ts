@@ -1,4 +1,4 @@
-export default interface KeyLight {
+export interface KeyLight {
     ip: string;
     port: number;
     name: string;
