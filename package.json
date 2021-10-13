@@ -29,13 +29,14 @@
   "dependencies": {
     "bonjour": "^3.5.0",
     "request": "^2.88.2",
-    "request-promise": "^4.2.5"
+    "request-promise": "^4.2.6",
+    "ts-number-range": "^1.0.2"
   },
   "devDependencies": {
-    "typescript": "^3.7.5",
     "@types/bonjour": "^3.5.5",
     "@types/request": "^2.48.4",
-    "@types/request-promise": "^4.1.45"
+    "@types/request-promise": "^4.1.45",
+    "typescript": "^3.7.5"
   },
   "files": [
     "dist/**/*"

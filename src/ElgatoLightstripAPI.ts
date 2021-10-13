@@ -1,28 +1,30 @@
 import bonjour, { Bonjour, Service } from "bonjour";
 import { put, get } from "request-promise";
 import { EventEmitter } from "events";
-import { KeyLight, KeyLightOptions } from "./types/KeyLight";
+import { LightStrip, LightStringOptions } from "./types/LightStrip";
 
-export class ElgatoLightAPI extends EventEmitter {
+export class ElgatoLightstripAPI extends EventEmitter {
     private bonjour: Bonjour;
-    public keyLights: Array<KeyLight>;
+    public lightStrips: Array<LightStrip>;
 
     /**
-     * Creates an instance of ElgatoLightAPI.
+     * Creates an instance of ElgatoKeylightAPI.
      *
-     * @memberof ElgatoLightAPI
+     * @memberof ElgatoKeylightAPI
      */
     constructor() {
         super();
 
         this.bonjour = bonjour();
 
-        this.keyLights = new Array();
+        this.lightStrips = new Array();
 
         // Continually monitors for a new keylight to be added
         const browser = this.bonjour.find({ type: 'elg' });
-        browser.on('up', (service) => {
-            this.addKeylight(service);
+        browser.on('up', service => {
+            console.log("type: "+service.type)
+            //@ts-expect-error
+            this.addLightstrip(service);
         });
     }
 
@@ -31,10 +33,10 @@ export class ElgatoLightAPI extends EventEmitter {
      *
      * @private
      * @param {Service} service
-     * @memberof ElgatoLightAPI
+     * @memberof ElgatoKeylightAPI
      */
-    private async addKeylight(service: Service) {
-        let keyLight: KeyLight = {
+    private async addLightstrip(service: Service) {
+        let lightStrip: LightStrip = {
             ip: service['referer'].address,
             port: service.port,
             name: service.name
@@ -42,18 +44,18 @@ export class ElgatoLightAPI extends EventEmitter {
 
         try {
             //Grab our keylights settings, info, and current options
-            let settingsCall = await get(`http://${keyLight.ip}:${keyLight.port}/elgato/lights/settings`);
-            keyLight.settings = await JSON.parse(settingsCall);
+            let settingsCall = await get(`http://${lightStrip.ip}:${lightStrip.port}/elgato/lights/settings`);
+            lightStrip.settings = await JSON.parse(settingsCall);
 
-            let infoCall = await get(`http://${keyLight.ip}:${keyLight.port}/elgato/accessory-info`);
-            keyLight.info = await JSON.parse(infoCall);
+            let infoCall = await get(`http://${lightStrip.ip}:${lightStrip.port}/elgato/accessory-info`);
+            lightStrip.info = await JSON.parse(infoCall);
 
-            let optionsCall = await get(`http://${keyLight.ip}:${keyLight.port}/elgato/lights`);
-            keyLight.options = await JSON.parse(optionsCall);
+            let optionsCall = await get(`http://${lightStrip.ip}:${lightStrip.port}/elgato/lights`);
+            lightStrip.options = await JSON.parse(optionsCall);
 
             //Push the keylight to our array and emit the event
-            this.keyLights.push(keyLight);
-            this.emit('newLight', keyLight);
+            this.lightStrips.push(lightStrip);
+            this.emit('newLightStrip', lightStrip);
         } catch (e) {
             console.error(e);
         }
@@ -65,16 +67,16 @@ export class ElgatoLightAPI extends EventEmitter {
      * @param {KeyLight} light
      * @param {KeyLightOptions} options
      * @returns {Promise<any>}
-     * @memberof ElgatoLightAPI
+     * @memberof ElgatoKeylightAPI
      */
-    public async updateLightOptions(light: KeyLight, options: KeyLightOptions): Promise<any> {
+    public async updateLightOptions(light: LightStrip, options: LightStringOptions): Promise<any> {
         return new Promise(async (resolve, reject) => {
             light.options = options;
             try {
                 await put(`http://${light.ip}:${light.port}/elgato/lights`, {
                     body: JSON.stringify(options)
                 });
-
+                //@ts-expect-error
                 return resolve();
             } catch (e) {
                 return reject(e);
@@ -87,16 +89,16 @@ export class ElgatoLightAPI extends EventEmitter {
      *
      * @param {KeyLightOptions} options
      * @returns {Promise<any>}
-     * @memberof ElgatoLightAPI
+     * @memberof ElgatoKeylightAPI
      */
-    public async updateAllLights(options: KeyLightOptions): Promise<any> {
+    public async updateAllStrips(options: LightStringOptions): Promise<any> {
         return new Promise((resolve, reject) => {
-            for (let x = 0; x < this.keyLights.length; x++) {
-                this.updateLightOptions(this.keyLights[x], options).catch(e => {
+            for (let x = 0; x < this.lightStrips.length; x++) {
+                this.updateLightOptions(this.lightStrips[x], options).catch(e => {
                     return reject(e);
                 });
             }
-
+            //@ts-expect-error
             return resolve();
         });
     }

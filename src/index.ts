@@ -1,2 +1,4 @@
-export * from './ElgatoLightAPI';
+export * from './ElgatoKeylightAPI';
+export * from './ElgatoLightstripAPI'
 export * from './types/KeyLight';
+export * from './types/LightStrip'
