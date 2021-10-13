@@ -20,7 +20,7 @@ export class ElgatoLightstripAPI extends EventEmitter {
         this.lightStrips = new Array();
 
         // Continually monitors for a new keylight to be added
-        const browser = this.bonjour.find({ type: 'elg' });
+        const browser = this.bonjour.find({ type: 'elgato light' });
         browser.on('up', service => {
             console.log("type: "+service.type)
             //@ts-expect-error

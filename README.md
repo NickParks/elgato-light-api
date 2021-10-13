@@ -9,7 +9,11 @@ Working on this!
 
 ## How to use
 
-# This section is going to be updated soonTM
+### Site for Color Codes:
+I found this nice site that gives you an pretty solid color picker and returns the values you need for the code. 
+
+You need to ues the `HSL` field: [http://colorizer.org/](http://colorizer.org/)
+### This section is going to be updated soonTM
 
 Create a new instance of `ElgatoLightAPI`:
 

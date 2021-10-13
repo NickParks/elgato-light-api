@@ -20,7 +20,7 @@ export class ElgatoKeylightAPI extends EventEmitter {
         this.keyLights = new Array();
 
         // Continually monitors for a new keylight to be added
-        const browser = this.bonjour.find({ type: 'elg' });
+        const browser = this.bonjour.find({ type: 'elgato key' });
         browser.on('up', service => {
             //@ts-expect-error
             this.addKeylight(service);
