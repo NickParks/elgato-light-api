@@ -3,14 +3,14 @@ import { put, get } from "request-promise";
 import { EventEmitter } from "events";
 import { KeyLight, KeyLightOptions } from "./types/KeyLight";
 
-export class ElgatoLightAPI extends EventEmitter {
+export class ElgatoKeylightAPI extends EventEmitter {
     private bonjour: Bonjour;
     public keyLights: Array<KeyLight>;
 
     /**
-     * Creates an instance of ElgatoLightAPI.
+     * Creates an instance of ElgatoKeylightAPI.
      *
-     * @memberof ElgatoLightAPI
+     * @memberof ElgatoKeylightAPI
      */
     constructor() {
         super();
@@ -20,8 +20,9 @@ export class ElgatoLightAPI extends EventEmitter {
         this.keyLights = new Array();
 
         // Continually monitors for a new keylight to be added
-        const browser = this.bonjour.find({ type: 'elg' });
-        browser.on('up', (service) => {
+        const browser = this.bonjour.find({ type: 'elgato key' });
+        browser.on('up', service => {
+            //@ts-expect-error
             this.addKeylight(service);
         });
     }
@@ -31,7 +32,7 @@ export class ElgatoLightAPI extends EventEmitter {
      *
      * @private
      * @param {Service} service
-     * @memberof ElgatoLightAPI
+     * @memberof ElgatoKeylightAPI
      */
     private async addKeylight(service: Service) {
         let keyLight: KeyLight = {
@@ -53,7 +54,7 @@ export class ElgatoLightAPI extends EventEmitter {
 
             //Push the keylight to our array and emit the event
             this.keyLights.push(keyLight);
-            this.emit('newLight', keyLight);
+            this.emit('newKeyLight', keyLight);
         } catch (e) {
             console.error(e);
         }
@@ -65,7 +66,7 @@ export class ElgatoLightAPI extends EventEmitter {
      * @param {KeyLight} light
      * @param {KeyLightOptions} options
      * @returns {Promise<any>}
-     * @memberof ElgatoLightAPI
+     * @memberof ElgatoKeylightAPI
      */
     public async updateLightOptions(light: KeyLight, options: KeyLightOptions): Promise<any> {
         return new Promise(async (resolve, reject) => {
@@ -74,7 +75,7 @@ export class ElgatoLightAPI extends EventEmitter {
                 await put(`http://${light.ip}:${light.port}/elgato/lights`, {
                     body: JSON.stringify(options)
                 });
-
+                //@ts-expect-error
                 return resolve();
             } catch (e) {
                 return reject(e);
@@ -87,7 +88,7 @@ export class ElgatoLightAPI extends EventEmitter {
      *
      * @param {KeyLightOptions} options
      * @returns {Promise<any>}
-     * @memberof ElgatoLightAPI
+     * @memberof ElgatoKeylightAPI
      */
     public async updateAllLights(options: KeyLightOptions): Promise<any> {
         return new Promise((resolve, reject) => {
@@ -96,7 +97,7 @@ export class ElgatoLightAPI extends EventEmitter {
                     return reject(e);
                 });
             }
-
+            //@ts-expect-error
             return resolve();
         });
     }
