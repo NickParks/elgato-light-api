@@ -1,5 +1,5 @@
-# Elgato Key Light API
-Control Elgato Key Lights with Javascript!
+# Elgato Light API
+Control Elgato Key Lights and Light Strips with Javascript!
 
 ## Installation
 
