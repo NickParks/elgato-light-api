@@ -1,7 +1,7 @@
-import { ElgatoLightAPI } from "../ElgatoLightAPI";
+import { ElgatoKeylightAPI } from "../ElgatoKeylightAPI";
 import { KeyLight } from "../types/KeyLight";
 
-const lightAPI = new ElgatoLightAPI();
+const lightAPI = new ElgatoKeylightAPI();
 
 async function start() {
     lightAPI.on('newLight', (newLight: KeyLight) => {

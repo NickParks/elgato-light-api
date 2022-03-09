@@ -1,4 +1,4 @@
-import bonjour, { Bonjour, Service } from "bonjour";
+import bonjour, { Bonjour, RemoteService, Service } from "bonjour";
 import { put, get } from "request-promise";
 import { EventEmitter } from "events";
 import { LightStrip, LightStringOptions } from "./types/LightStrip";
@@ -23,7 +23,6 @@ export class ElgatoLightstripAPI extends EventEmitter {
         const browser = this.bonjour.find({ type: 'elgato light' });
         browser.on('up', service => {
             console.log("type: "+service.type)
-            //@ts-expect-error
             this.addLightstrip(service);
         });
     }
@@ -32,10 +31,10 @@ export class ElgatoLightstripAPI extends EventEmitter {
      * Adds a key light instance to our current array
      *
      * @private
-     * @param {Service} service
+     * @param {RemoteService} service
      * @memberof ElgatoKeylightAPI
      */
-    private async addLightstrip(service: Service) {
+    private async addLightstrip(service: RemoteService) {
         let lightStrip: LightStrip = {
             ip: service['referer'].address,
             port: service.port,
