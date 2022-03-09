@@ -1,4 +1,4 @@
-import bonjour, { Bonjour, RemoteService, Service } from "bonjour";
+import bonjour, { Bonjour, RemoteService } from "bonjour";
 import { put, get } from "request-promise";
 import { EventEmitter } from "events";
 import { LightStrip, LightStringOptions } from "./types/LightStrip";
@@ -20,10 +20,10 @@ export class ElgatoLightstripAPI extends EventEmitter {
         this.lightStrips = new Array();
 
         // Continually monitors for a new keylight to be added
-        const browser = this.bonjour.find({ type: 'elgato light' });
-        browser.on('up', service => {
-            console.log("type: "+service.type)
-            this.addLightstrip(service);
+        this.bonjour.find({ type: 'elg' }, service => {
+            if (service.txt.md.startsWith('Elgato Light Strip')) {
+                this.addLightstrip(service);
+            }
         });
     }
 
@@ -65,17 +65,16 @@ export class ElgatoLightstripAPI extends EventEmitter {
      *
      * @param {KeyLight} light
      * @param {KeyLightOptions} options
-     * @returns {Promise<any>}
+     * @returns {Promise<void>}
      * @memberof ElgatoKeylightAPI
      */
-    public async updateLightOptions(light: LightStrip, options: LightStringOptions): Promise<any> {
+    public async updateLightOptions(light: LightStrip, options: LightStringOptions): Promise<void> {
         return new Promise(async (resolve, reject) => {
             light.options = options;
             try {
                 await put(`http://${light.ip}:${light.port}/elgato/lights`, {
                     body: JSON.stringify(options)
                 });
-                //@ts-expect-error
                 return resolve();
             } catch (e) {
                 return reject(e);
@@ -87,17 +86,16 @@ export class ElgatoLightstripAPI extends EventEmitter {
      * Updates all lights to the given options
      *
      * @param {KeyLightOptions} options
-     * @returns {Promise<any>}
+     * @returns {Promise<void>}
      * @memberof ElgatoKeylightAPI
      */
-    public async updateAllStrips(options: LightStringOptions): Promise<any> {
+    public async updateAllStrips(options: LightStringOptions): Promise<void> {
         return new Promise((resolve, reject) => {
             for (let x = 0; x < this.lightStrips.length; x++) {
                 this.updateLightOptions(this.lightStrips[x], options).catch(e => {
                     return reject(e);
                 });
             }
-            //@ts-expect-error
             return resolve();
         });
     }

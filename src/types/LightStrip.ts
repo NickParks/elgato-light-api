@@ -32,7 +32,6 @@ export interface LightStringOptions {
         on: number,
         hue: number,
         saturation: number,
-        brightness: number,
-        temperature: number
+        brightness: number
     }]
 }
