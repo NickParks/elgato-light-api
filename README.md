@@ -10,7 +10,9 @@ Running `npm i elgato-light-api` will install the package. Typescript is nativel
 Create a new instance of `ElgatoLightAPI`:
 
 ```Javascript
-const lightAPI = new ElgatoLightAPI();
+import { ElgatoKeylightAPI, KeyLight } from "elgato-light-api";
+
+const lightAPI = new ElgatoKeylightAPI();
 ```
 
 An Event Emitter is used to notify listeners when a new Key Light is detected.
