@@ -3,7 +3,7 @@ export interface LightStrip {
     port: number;
     name: string;
     settings?: LightStripSettings;
-    info?: LightStrinInfo;
+    info?: LightStringInfo;
     options?: LightStringOptions;
 }
 
