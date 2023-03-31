@@ -16,7 +16,7 @@ export interface LightStripSettings {
     colorChangeDurationMs: number;
 }
 
-export interface LightStrinInfo {
+export interface LightStringInfo {
     productName: string;
     hardwareBoardType: number;
     firmwareBuildNumber: number;
